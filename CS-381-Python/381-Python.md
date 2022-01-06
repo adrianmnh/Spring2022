@@ -80,8 +80,32 @@ format(123123.14, '20.2f')  -> a field of 20, and floating precision 2
 '20,.2f' , number with commas
 
 
+“math” is a module (= a file) containing a number of mathematical functions.
+The “import” statement instructs Python to “load” the module and make these functions available for
+use. 
 
 
 
 
+Dunder Methods:
+Double under - some are functions, some are just places to store things like strings
+
+doc - documentations string stores
+
+name - of the modules
+
+3 ways to import a module
+
+* import math
+  * math.sqrt(9)
+
+* from math import sqrt
+  * sqrt(9)
+
+* from math import *
+  * sqrt(9)
+
+
+How to make a class function in c++?
+By overloading the function
 
