@@ -80,32 +80,24 @@ format(123123.14, '20.2f')  -> a field of 20, and floating precision 2
 '20,.2f' , number with commas
 
 
-“math” is a module (= a file) containing a number of mathematical functions.
-The “import” statement instructs Python to “load” the module and make these functions available for
-use. 
+## Difference between runtime stack and heap in python:
+Everything on the heap in python
+
+In c/c++
+int a : automatic variable
+
+In memory, there's a part for functions(code segment), and another for variables. A portion of memory is allocated for static variables. Another portion allocated for runtime stack(activation records) which includes variables within some scope. The memory allocated for dynamic memory is called the heap.
+
+In the heap, memoery is used without previous knowledge of the amount of memory that may be used. A memory manager distributes available space to the heap as needed
+
+When a program runs on heap memory, it generally takes a lot more time to execute because the heap requires different memory allocation algorithms working on the background.
+
+Python functions that are written in c/c++ are generally much faster than native python functions
 
 
 
 
-Dunder Methods:
-Double under - some are functions, some are just places to store things like strings
-
-doc - documentations string stores
-
-name - of the modules
-
-3 ways to import a module
-
-* import math
-  * math.sqrt(9)
-
-* from math import sqrt
-  * sqrt(9)
-
-* from math import *
-  * sqrt(9)
 
 
-How to make a class function in c++?
-By overloading the function
+
 
