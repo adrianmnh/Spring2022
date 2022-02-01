@@ -95,9 +95,78 @@ When a program runs on heap memory, it generally takes a lot more time to execut
 Python functions that are written in c/c++ are generally much faster than native python functions
 
 
+What's an object?
+Things can be done to an object, use functions on it and such
+
+Python is a first class object language
+
+## Difference between class and object
+
+Class creates class objects
+
+Dunder methods??
+Double under methods
+* Special methods of certain classes
+
+When using iterables:
+* next(q) &rarr; q.__next__
 
 
 
+add methods of the integer class
+
+```c
+q=7
+q.__add__(5)
+```
+
+In c/c++
+
+if Z is a rational number, and we want to perform addition between 2 objects of class "rational", then we can overload the + operator
+
+```c
+Rat operator+(Rat r){...}
+z=x.operator+(r) // this is the equivalent of a dunder methods in Python
+```
+
+## Lists, tuples, dictionaries
+
+You can store different type objects in a list
+
+c/c++, lists are homogenous
+
+In Python, a list is an array of pointers, the types don't adhere to the variables(names) but to the objects pointing to
+
+## Why is python considered a scripting language?
+
+* Scripted languages are interpreted
+* 
+
+Scripting languages are used for coordinating multiple programs by checking status codes, executes dynamically. Written in operating system language
+
+c/c++ main function returns int
+
+In large systems, there are chains of programs running
+
+If a program is successful, 
 
 
+## Function overloading:
+
+Getting one function to do multiple things
+
+In python, function names can be overloaded by overriding the previous function definition
+
+
+For loops call **next()** on eveyr iteration of the loop
+
+For loops are generators
+
+
+### Python 
+
+does nto concern with closing files or memory leakage. Context manager
+
+## RAII
+Resources Acquising initialization
 
