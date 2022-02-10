@@ -73,11 +73,11 @@ Provides a new relation with a specified name from the expression E, allowing at
 ### Cartesian Product **R&#10005;S**
 Concatenation of tuples, set multiplication
 
-* List the names and comments of all clients who ahve viewed a property for rent
+* List the names and comments of all clients who have viewed a property for rent
 
 &#120503;<sub>clientID,fname,lname</sub>(Client) &#10005; &#120503;<sub>clientID, propertyID, comment</sub>(Viewing)
 
-`This operation contains too much information, we need specific tuples where the clientIDs are equal from both relations and the comment is not null`
+`This operation contains too much information, we need only tuples where the clientIDs are equal from both relations and the comment is not null`
 
 **&sigma;**<sub>Client.clientID = Viewing.clientID</sub> (&#120503;<sub>clientID,fname,lname</sub>(Client) &#10005; &#120503;<sub>clientID, propertyID, comment</sub>(Viewing))
 
@@ -90,14 +90,17 @@ Equivalent to performing a **Selection** operation, using the **join predicate**
 * Outer join
 * Semi-join
 
-## Theta join(&theta;-join) **R&#8904;<sub>F</sub>S**
+## <text2 style=color:orange>Theta join(&theta;-join) **R&#8904;<sub>F</sub>S**M</text>
  R&#8904;<sub>F</sub>S = **&sigma;**<sub>F</sub>(R &#10005; S) &rArr;  Relation that contains tuples satisfying **predicate F** over Cartesian Product R x S.
 
-Predicate F is of the from **R**a<sub>i</sub> &theta; **S**b<sub>i</sub>
+Predicate F is of the form **R**a<sub>i</sub> &theta; **S**b<sub>i</sub>
 
 Theta operators: &lt; &leq; &gt; &geq; = &ne;
 
-## 
+The degree of a Theta join is the sum of the degrees of the operand relations R and S.
+
+## <text2 style=color:orange>Equijoin
+A Theta join where the predicate F contains **only equality (=)**
 
 
 
@@ -107,7 +110,7 @@ Theta operators: &lt; &leq; &gt; &geq; = &ne;
 
 ---
 
-### Decomposing complex operations (**&larr;**)
+## Decomposing complex operations (**&larr;**)
 Giving a name to the results of intermediate operations to facilitate the extraction of desired cross-referencing. This allows the reuse of relations that result from intermediate operations 
 
 TempView(clientID, propertyID, comment) &larr; &Pi;<sub>clientID, propertyID, comment)(Viewing)
