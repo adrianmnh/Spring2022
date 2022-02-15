@@ -368,3 +368,5 @@ Multi-value indicator - `[1..x]`
 Derived attribute - `\`
 
 Arrows indicate relation between tables
+
+Yyup
