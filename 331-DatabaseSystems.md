@@ -351,3 +351,18 @@ Step 5: Display the output
 <text style=color:red>(A &#10005; Patient_Room)</text>**
 
 <img src="./331-img/04-01.png">
+
+
+
+<img src="./331-img/break.png">
+
+## _Class 5 - 2/14/2022_
+
+
+## UML
+
+Unified Modeling Language
+
+Multi-value indicator - `[1..x]`
+
+Derived attribute - `\`
