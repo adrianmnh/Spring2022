@@ -65,7 +65,7 @@ Integrated cloud service utilizing both private and public clouds to perform dis
 TPU Tensor Processing Units
 
 
-
+<img src="./cloud-img/break.png">
 
 ### *Class 3 - 2/10/2022*
 ## Availability Zones
@@ -109,3 +109,15 @@ Power Usage Effectiveness @Prineville
 
 ## AWS's data centers
 The AWS Cloud spans 84 Availability Zones within 26
+
+
+<img src="./cloud-img/break.png">
+
+### *Class 4 - 2/15/2022*
+
+
+
+
+
+
+<img src="./cloud-img/break.png">
