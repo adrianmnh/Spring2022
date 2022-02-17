@@ -369,4 +369,46 @@ Derived attribute - `\`
 
 Arrows indicate relation between tables
 
-Yyupss
+
+<img src="./331-img/break.png">
+
+## _Class 6 - 2/16/2022_
+
+## Music Database
+
+### 1. Questions the database should answer
+1. Identify songs by genre, display count
+2. Identify sounds and number of plays
+3. Identify songs played more than once
+4. Identify songs that started, but didn't complete playing(skipped)
+5. Identify all songs by Motley Crue or Lagy Gaga
+6. Identify song with specific words
+7. Identify credit cards expiring soon. Display customer name and method of payment
+
+### 2. Create UML Diagrams
+
+### 3. Convert UML to relations
+Artists(artist_id, artist_first, artist_last, artist_stage_name, artist_country, artist_language, artist_dob, artist_debute, artist_age)
+
+artist_id | artist_first | artist_last | artist_stage_name | artist_country | artist_language | artist_dob
+:-:|:-:|:-:|:-:|:-:|:-:|:-:
+||Prince Rogers | Nelson | The artist; Camille; The artist formally known as prince | US | English | 6/7/58
+||Stefani|Germanotta|Lagy Gaga|US; Canada|
+||Jeffrey|Williams|Young Thug; SEX; Thugger; | US |English| 8/16/91
+||Taylor|Swift||US; France | English
+
+
+
+A solution to handle multi value attributes is by creating a separate relation that uniquely identifies each of the multiple attributes
+
+ten commandments ofdatabases
+
+minimize duplication: Make primary keys to prevent duplicate data
+
+ Each realtion must have primary keys
+
+ Ensure domain has limited values, foreign key second constraint
+
+ attribute has a value, cannot be NULL
+
+ Composite primary keys - Are all or some attributes going to be primary keys
