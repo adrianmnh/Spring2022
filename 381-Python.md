@@ -170,3 +170,26 @@ does nto concern with closing files or memory leakage. Context manager
 ## RAII
 Resources Acquising initialization
 
+
+# Command Compilation:
+
+`python -m module_name` - run library module as a script
+
+`python -m pydoc package_name` - documentation
+
+`cat/nano PATH/module_name.py` - view documentation without executing commands
+
+`python -m venv virtualenv_name` - create venv
+
+`venvPATH\Scripts\activate.bat` - activate venv
+
+`pip install package` - install package in venv
+
+
+# Python Django Server
+
+`python -m django version`
+
+`django-admin startproject ProjectName`
+
+python ProjectName\manage.py startapp AppName`
