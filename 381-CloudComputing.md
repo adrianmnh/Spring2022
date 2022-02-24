@@ -230,4 +230,100 @@ Appds should consider there rules
 * All clients and other applications interact with KLubernetes **strictly** through the API Server
 * Acts as the gatekleeper to the cluster by handling authentication and authorization, request validation, mutation, and admission control in addition to being the front-end to the backing datastore
 
+### Kube-controller-manager
+* Monitors the cluster state via the apiserver and **steers the cluster towards the desired state**
+* **Node Controller**: Responsible for noticing and responding when nodes go down
+* **Replication Controller**: Responsible for maintaining the correct number of pods for every application controller object in the system
+* **Endpoints Controller**: Populates the Endpoints object(that is, joins Services & Pods).
+* **Service Account & Token Controllers**: Crewate default accounts and API access tokens for 
+
+### kube-scheduler
+* Component on the master that watches newly created pods that have no node assigned, and selects a node for them to run on
+* Factors taken into account for scheduling decisions include individual and collective resource requirements, hardware/software/policy constraints, affinity and antiaffinity specifications, data locality, inter-workload interference and deadlines
+
+### cloud-controller-manager
+* **Node Controller**: For checking the cloud provider to determine if a node has been deleted in the cloud after it stops repsonding
+* **Route Controller**: For setting up routes in the underlying cloud infrastructure
+* **Service Controller**: 
+* **4**: 
+
+### etcd
+* Atomic key-value store that uses Raft consensus
+* Backing store for all control plane metadata
+
+
+## Reconciliation between de lared and actual state
+
+## Control loops
+
+## Replication Controllers
+> A type of controllers(control loop)
+* Ensures N copies of a pod always running
+  * if too few, start new ones
+  * if too many, kill some
+  * group == selector
+* Cleanly layered on top of the core
+  * all access is by puclic APIs
+* Replicated pods are fungible
+  * ..
+
+## Node Components
+
+### Kubelet
+* agent(daemon) that runs on each node in the cluster. It makes sure that containers are running in a pod
+* The kubelet takes a set of PodSpecs that are provided through various mechanisms and ensures that the containers described in those PodSpecs are running and healthy
+
+### kube-proxy
+* Managet the network rules on each node
+* Perform connection forwarding or load balancing for Kubernetes kluster
+
+### Container Runtime Engine
+* A container runtin is a CRI(COntainer Runtime Interface) compatible application that executes and manages containers
+  * Containered(docker)
+  * Cri-o
+  * Rkt
+  * Kata(formerly known as )
+
+# Borg
+CLuster management system at Google taht achieves high utilization by:
+* Admission control
+* Efficient task-packing
+* Over-commitment
+* Machine sharing
+
+## User Perspective
+* Allocs
+  * Reserved set of resources
+* Priority, Quota, and Admission Control
+  * Job has a priority
+
+## Scheduling a Job
+```go
+job Hello_world = {
+  runtime = { cell = "ic" } // what cell shoyuld run it in?
+}
+```
+
+## Borg Architecture
+* Borgmaster
+  * main Borgmaster process & Scheduler
+  * Five Replicas
+* Borglet
+
+## Kubernetes
+**Directly derived:**
+* Borglet ⇒ Kubelet
+* alloc ⇒ pod
+* Borg containers ⇒ docker
+* declarative specifications
+
+**Loosely inpired by Borg**
+* Job ⇒ labels
+* managed ports ⇒ IP per pod
+* Monolithic master ⇒ micro-services
+
+![](./cloud-img/07-06.png)
+
+next week: **Hadoop**
+
 <img src="./cloud-img/break.png">
