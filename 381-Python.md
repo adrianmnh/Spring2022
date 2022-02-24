@@ -190,6 +190,12 @@ Resources Acquising initialization
 
 `python -m django version`
 
-`django-admin startproject ProjectName`
+`django-admin startproject ProjectName` - creates project and populates django organizational unit. Contains settings and database configuration for single or multiple apps/website
 
-python ProjectName\manage.py startapp AppName`
+`python ProjectName/manage.py startapp AppName` - creates single app/website within django project
+
+`python manage.py migrate` - database migration: internal management tool that ensures django **database used** is consistent with **database definition**
+
+`python manage.py runserver`
+
+* `urls.py` - stores urls  must be in both the application and enclosing django project. This file must have the urls 

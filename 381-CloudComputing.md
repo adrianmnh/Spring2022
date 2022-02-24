@@ -117,7 +117,117 @@ The AWS Cloud spans 84 Availability Zones within 26
 
 
 
+<img src="./cloud-img/break.png">
+
+### *Class 7 - 2/24/2022*
+## Everything at google runs in cointainers
+* Gmail Webserach Maps
+* MapReduce MillWHeel Pregel
+* Colossus BigTable SPanner
+* Even Gogogle Cloud COmputing
+
+## Container Orchestration
+`More than packing and isolation needed`
+
+Scheduling?
+
+Lifecycle and health?
+
+Discovery?
+
+Monitoring?
+
+Auth{n,z}
+
+Aggregates?
+
+Scaling?
+
+Containers working together have dependencies.
+
+## Open Source Containers: **Kubernetes**
+
+Greek for Helmsamn; also the root of the word Governor and cybernetic
+* Container orchestrator
+* Builds on Docker containers
+  * also supporting other container technologies
+* Multiple cloud and bare-metal environments
+* Supports existing OSS apps
+  * cannot require appds becoming cloud-native
+* Inspired and informed by Google's experiences and internal systems
+* **100% Open source**, written in **GO**
+
+Let users manage applications, not machines
+> Look at Borg and its connection with Kubernetes
 
 
+![](./cloud-img/07-01.png)
+
+Basic Unit of container: Pod
+
+## Pod
+A kubernetes abstraction represents a group of one or more application containers, and some shared resources for those containers
+
+* Shared storage, as Volumes
+* Networking, as a unique cluster IP address
+* Information about how to run each container, such as the container image version or specific ports to use
+
+![](./cloud-img/07-02.png)
+
+Containers can be associated with different labels
+
+## Pod Lifecycle
+Once schedule to a node, pods do not move
+* restart policy means restart **in-place**
+
+Pods can be ovserved _pending, running, succeeded, or failed_
+* _failed_ is **really** the end - no more restarts
+* no complex state machine logic
+
+Pods are **not rescheduled** by the scheduler or apiserver
+* Even if a  node dies
+* controllers are responsible for this
+* keeps the scheduler **simple**
+
+Appds should consider there rules
+* Services hide this? `services don't show pods prop`
+* Makes pod-to-pod communication more formal
+
+## Pod
+
+>Simplest unit in Kubernetes
+* Represents Process running in your cluster
+* Encapsulates a container(or sometimes multiple)
+* Replicating a Pod serves to scale and application horizontally
+
+![](./cloud-img/07-03.png)
+
+## ReplicaSet
+
+>Maintains a set of identical Pods
+* Definition consists of:
+  * Number of replicas
+  * Pod Template
+  * Selectyor to identify which Pods it can acquire
+> Generally encapsulated by a Deployment
+
+![](./cloud-img/07-04.png)
+
+## Deployment
+
+> Provides updates for pods and replicasets
+* Runs multiple replicas of your application
+* Suitable for stateless applications
+
+![](./cloud-img/07-05.png)
+
+## Control Plane
+
+### Kube-apiserver
+
+> Provides a forward facing REST interface into the Kubernetes control plane and datastore
+
+* All clients and other applications interact with KLubernetes **strictly** through the API Server
+* Acts as the gatekleeper to the cluster by handling authentication and authorization, request validation, mutation, and admission control in addition to being the front-end to the backing datastore
 
 <img src="./cloud-img/break.png">

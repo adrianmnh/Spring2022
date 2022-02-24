@@ -412,3 +412,69 @@ minimize duplication: Make primary keys to prevent duplicate data
  attribute has a value, cannot be NULL
 
  Composite primary keys - Are all or some attributes going to be primary keys
+
+ # `Com-PAH-sit` primary keys
+
+
+ <img src="./331-img/break.png">
+
+## _Class 7 - 2/23/2022_
+
+# Convert UML Diagram entities into Relations
+
+
+## Types of attributes
+* Primary/Foreign Key
+* Simple
+* Composite
+* Single value
+* Multi-value
+* Derived
+
+
+
+song_id | song_name | song_length | song_lyrics 
+:-:|:-:|:-:|:-:
+999999 | Let's Go Crazy | 2:30 | lalala-lyrics
+77777 | Bad Romance | 3:15 | Baby some lyrics go here
+
+artist_stage_names(artist_id, artist_stage_first, artist_stage_last)
+
+artist_country(artist_id, country)
+
+songs(song_id, song_name, song_length, song_genere, song_lyrics)
+
+artist_song(artist_id, song_id)
+
+customer(customer_email, customer_first, customer_last, customer_plan, customer_cc, customer_expire)
+
+plays(play_id, customer_email, song_id, play_start, play_end, play_duration)
+
+### Question 1:
+Identify the country for the artist who sing "Bad Romance". Display Country
+
+* Relation: artist_country - `artist_id`
+* Relation: songs - `song_id`
+* Relation: artist_song - `artist_id` and `song_id`
+
+BR &larr; ẟsongs.songname="Bad Romance"(songs)
+
+A &larr; ẟsong.song_id = artist_song.song_id(BR X artist_song)
+
+`or`
+
+A &larr; ẟsong.song_id = artist_song.song_id(song X artist_song)
+
+B &larr; ẟA.artist_id = artist_country.artist_id(A X artitst_country)
+
+BR &larr; ẟ
+
+
+### Question 2:
+Identify artist with no songs. Display the artist name.
+
+* Relation: artists
+* Relation: artist_song
+
+<img src="./331-img/07-01.png">
+<img src="./331-img/07-02.png">
