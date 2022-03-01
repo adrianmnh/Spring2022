@@ -1,3 +1,10 @@
+<style>
+r { color: red }
+o { color: orange }
+b { color: blue }
+</style>
+
+
 # **Database System - *Daniel Laevitt***
 
 3 exams
@@ -438,17 +445,17 @@ song_id | song_name | song_length | song_lyrics
 999999 | Let's Go Crazy | 2:30 | lalala-lyrics
 77777 | Bad Romance | 3:15 | Baby some lyrics go here
 
-artist_stage_names(artist_id, artist_stage_first, artist_stage_last)
+`artist_stage_names(artist_id, artist_stage_first, artist_stage_last)`
 
-artist_country(artist_id, country)
+`artist_country(artist_id, country)`
 
-songs(song_id, song_name, song_length, song_genere, song_lyrics)
+`songs(song_id, song_name, song_length, song_genere, song_lyrics)`
 
-artist_song(artist_id, song_id)
+`artist_song(artist_id, song_id)`
 
-customer(customer_email, customer_first, customer_last, customer_plan, customer_cc, customer_expire)
+`customer(customer_email, customer_first, customer_last, customer_plan, customer_cc, customer_expire, customer_address(street, zipcode, state, country))`
 
-plays(play_id, customer_email, song_id, play_start, play_end, play_duration)
+`plays(play_id, customer_email, song_id, play_start, play_end, play_duration)`
 
 ### Question 1:
 Identify the country for the artist who sing "Bad Romance". Display Country
@@ -478,3 +485,93 @@ Identify artist with no songs. Display the artist name.
 
 <img src="./331-img/07-01.png">
 <img src="./331-img/07-02.png">
+
+
+## _Class 8 - 2/28/2022_
+
+# Aggregate Data
+
+### Question 1: Identify the # of songs. Display the number
+
+A &larr; **J** COUNT(song_id)(Songs)
+
+
+
+### Question 2: Identify # of customers by state. Display 2 colums: state and # of customers
+
+customer_state **J** COUNT(customer_id)(Customer)
+
+### Identify the number of Songs by artist
+
+Relation: artist
+* Attributes: artist_first, artist_last, artist_id
+
+Relation: artist_song
+* Attributes: artist_id
+
+begin cartesian product
+
+identify common attribute
+
+Cartesian Product:
+
+`artist and songs where artist.artist_id = artist_song.artist_id`
+
+`or`
+
+artist_id **J** COUNT(song_id)(artist_song)
+
+**A &larr; 
+<o>ẟ</o>
+<b>artist.artist_id = artist_song.artist_id</b>
+(<r>Artist X artist_song</r>)**
+
+**B &larr; 
+<o>Artist_first, artist_last</o>
+<b>Ͻ (COUNT)artist_id</b>
+<r> (A)</r>**
+
+`or`
+
+**B &larr;
+Ρ<sub>(Artist Name, Artist Last, Number of Songs)</sub>
+<o>Artist_first, artist_last</o>
+<b>Ͻ (COUNT)artist_id</b>
+<r> (A)</r>**
+
+### Question 4: Identify the number of ocurrences of a song name. Display song name and number of ocurrences
+
+Relation: Songs
+Attributes: song_name
+
+**Answer &larr;
+P<sub>(Song Name, number of song ocurrences)</sub>
+<o>song_name</o>
+<b>Ͻ (COUNT)song_id</b>
+<r> (Songs)</r>**
+
+### Question 5: Assume plan_cost is in Customer relation. Identify the monthly revenue for all Active Customers.
+
+Domain(customer_plan) &rarr; plan_cost
+* Student - 4.99
+* Free - 0
+* Premium - 9.99
+
+**Answer &larr;
+<b>Ͻ (SUM)plan_cost</b>
+<r> (Customer)</r>**
+
+### Identify monthly revenue by state
+**Answer &larr;
+<o>customer_state</o>
+<b>Ͻ (SUM)plan_cost</b>
+<r> (Customer)</r>**
+
+### Identify monthly revenue by state and show number of customers
+
+**Answer &larr;
+<o>customer_state</o>
+<b>Ͻ (SUM)plan_cost, COUNT(customer_id)</b>
+<r>(Customer)</r>**
+
+![](./331-img/08-01.png)
