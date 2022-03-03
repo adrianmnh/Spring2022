@@ -660,7 +660,7 @@ Candy
 4. Data/Time
    * MM DD YY HH Mi SS
    * 5/1/2021
-   * 
+  
 </div>
 </div>
 
@@ -670,6 +670,21 @@ CREATE TABLE PRODUCT
 
 (PRODUCT_ID NUMBER PRIMARY KEY,
 
-PRODUCT_PRICE DECIMAL(12,2)
+PRODUCT_PRICE DECIMAL(12,2))
+
+
+
+
+INSERT INTO PRODUCT(product_id, product_price)
+
+VALUES(1000, 3.25)
+
+
+
+SELECT * FROM PRODUCT;
 
 ```
+
+# Exam 1 Date: 3/9
+
+ℑ
