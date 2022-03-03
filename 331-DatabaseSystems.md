@@ -487,6 +487,7 @@ Identify artist with no songs. Display the artist name.
 <img src="./331-img/07-02.png">
 
 
+
 ## _Class 8 - 2/28/2022_
 
 # Aggregate Data
@@ -575,3 +576,100 @@ Domain(customer_plan) &rarr; plan_cost
 <r>(Customer)</r>**
 
 ![](./331-img/08-01.png)
+
+
+<img src="./331-img/break.png">
+
+## _Class 9 - 3/2/2022_
+
+# Relational Algebra
+
+## SQL - 'see-quell'
+`Structure Query Language`
+
+<div style="display: flex; align-items:center;">
+<div>
+
+Relational Database Management System(DBMS)
+1. Oracle
+   * Windows
+   * Unix
+2. IBM
+   * Windows
+   * Unix
+   * Mainframe
+3. Microsoft
+   * OS-Windows
+</div>
+<div>
+
+## SQL
+1. Search
+2. Add
+3. Change
+4. Delete
+</div>
+</div>
+
+## Different terminology:
+
+<div style="display: flex; align-items:center;">
+<div style="width:40%;">
+
+**Relational Algebra** | **Database**
+:-: | :-:
+Relation | Table
+Tuple | Row
+Attribute | Column
+
+Candy
+* Manufacturer
+* Expiration date
+* Price
+* Product Type
+  * Drink
+  * Candy
+  * Been
+  * Newspaper
+* Size
+  * Domain(S,M,L)
+* Type
+* Candy name
+</div>
+
+<div>
+
+## Type of Data
+
+1. Numbers
+   * decimals
+   * decimals
+2. Text
+   * any key on the keyboard
+   * *&^%$S@ Symbols
+   * 0-9
+   * A-Z
+   * 
+   * unicode cjk
+   * "y" or 'y'
+   * 2/1-31/2021
+   * char(25)
+   * 
+3. Boolean
+   * Y/N - T/F
+4. Data/Time
+   * MM DD YY HH Mi SS
+   * 5/1/2021
+   * 
+</div>
+</div>
+
+
+```SQL
+CREATE TABLE PRODUCT
+
+(PRODUCT_ID NUMBER PRIMARY KEY,
+
+PRODUCT_PRICE DECIMAL(12,2)
+
+```

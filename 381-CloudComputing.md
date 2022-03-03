@@ -327,3 +327,184 @@ job Hello_world = {
 next week: **Hadoop**
 
 <img src="./cloud-img/break.png">
+
+### *Class 7 - 2/24/2022*
+
+# Hadoop
+
+Sense of Data Size
+
+1 byte = 8 bits
+
+Kilobyte(1000 bytes) = 10^3bytes
+
+Megabyte = 10^6. One Photo image (iPhone) 4.5 MB
+
+Gigabyte(GB) = 10^9 bytes. 8/16 GB DRAM in MacBook
+
+Terabyte 10^12 Your hand disk: 1-3TB
+
+Petabyte(PB) = 10^15 bytes
+
+223,000 DVDs 4.7GB each to hold 1PB
+
+Ober 3.4 years of 24/7 Full HD video recording = 1 PB
+
+![](./cloud-img/08-01.png)
+
+
+
+## Apache Hadoop
+Compose of the following modules:
+
+* Hadoop Common - contains libraries and utilities needed by other hadoop modules
+
+* Hadoop Distributed File System (HDFS) - a distributed file system for storing data
+
+* Hadoop MapReduce - a programming model for large scale data processing
+
+* Hadoop YARN - resource-management and task scheduling
+
+* Hadoop Ozone(new in Hadoop )
+
+* ...
+
+![](./cloud-img/08-02.png)
+
+# Hadoop 1.x Architecture
+![](./cloud-img/08-03.png)
+
+# Hadoop 1.x key components
+
+## Name Node @ master node
+
+* Stores metadata : file/chunk namespaces, file-to-chunk mapping, location of each chunk's replicas
+
+## Job Tracker @ master node
+* Keeps track of all Map Redune Jobs that are running on various nodes.
+
+## Task Tracker @ each slave node
+* a slave tracker to the Job Tracker
+* Launches child processes (JVMs) to execute ....
+
+# Hadoop 2.x (Change in Hadoop Architecture)
+
+![](cloud-img/08-04.png)
+
+# Hadoop 2.x key componenets
+In Hadoop 2.x, there is no Job Tracker and Task Tracker. Replaced by (1)Resource Manager, (2)Node Manager, (3)Application Manager(more in Yarn)
+
+* Roles of the cluster nodes:
+
+  * Master Node(s): Typically one machine in the cluster is designated as the nameNide(NN) and another machine as the Resource Manager(RM), exclusively
+    * For simplicity, we can ...
+
+# Hadoop 2.x: HDFS + Yarn
+HDFS(Hadoop File System): store your data
+* Name Node + N DataNodes
+
+Yarn 
+
+# Hadoop 2.x: HDFS + Yarn
+![](cloud-img/08-05.png)
+
+# Hadoop in the cloud
+
+* Microsoft Azyure: Azure HDInsight
+* Amazon Elastic MapReduce(EMR)
+* Google Cloud Platform
+  * Google Cloud Dataproc: PaaS running Apache Spark and Apache Hadoop clusters
+
+* Oracle Cloud Platform
+  * Oracle Big Data SQL Cloud Service
+
+# Google File System
+> `Goal: global(distributed) file system that stores data across many machines`
+  * Need to handle 100's TBs
+* Google published details in 2003
+* **Open Source**
+
+# Workload-driven design
+>`Google workload characteristics - Huge files (GBs)`
+* Almost all writes are appends
+* Concurrent appends common
+* High throughput is valuable
+* Low latency is not
+
+# Workload examples
+Read entire dataset, do computation over it
+
+* Producer/consumer: many producers append work to file concurrently; one consumer reads and does work
+
+# Workload-driven design
+> Build a gloval (distributed) file system that incorporates all these application properties
+* Only supports features required by applications
+* Avoid difficult local system features, e.g.:
+  * rename dir
+  * links
+
+# Design details
+![](cloud-img/08-06.png)
+* `Files Stored as blocks`
+  * HDFS file is chopped up into 64MB/128MB blocks
+  * each block will reside on a different datanode
+* `Single master to coordinate access, keep metadata`
+  * Simple centralized master per Hadoop cluster
+  * Manages metadata(doesn't store the actual data chunks)
+  * Periodic heatbeat messages to check up on slaves 
+
+# Reliability
+* "Hardware failure is the norm rather than the exception"
+  * Hundreds of thousands of machines/disks(cheap but unreliable)
+  * Each componenet has a non-trivial probability of failure
+  * 100K drives(MTBF=3 years). one "failure" every 15 minutes
+  * Add in H/W failures for network, memory, power, etc
+* Reliability through replication
+  * Each block is replicated across 3+ ........
+  
+<sub>*Mean Time Between Failures</sub>
+
+# HDFS - A Quick Summary
+* HDFS is written in Java
+* Scaled to tens of petabytes of storage
+* Files split into blocks(default 64 or 128 MB), replicated across several data nodes(default 2) for fault tolerance
+* Single name...................
+
+# Writting files to HDFS
+* The client breaks File.txt into Blocks(3 blocks: A, B, C)
+  * For each block, Client consuslts NameNode
+  * Cleints writes block directly to one DataNode
+  * DataNode replicates block(not shown)
+![](cloud-img/08-08.png)
+
+# Replica placement policy
+* (1)Network performance issue:
+  * Communication in-rack: higher bandwith, lower latency(good for performance)
+  * Keep bulky flows in-rack when possible
+* (2)Data loss prevention
+  * Never lose all data even when the entire rack fails
+* Improve data reliability.....
+![](cloud-img/08-09.png)
+
+# Replica placement policy
+* **Replication factor = 3**
+  * **1st one** on the same node as the client(the writer),. otherwise on a random datanode
+  * **2nd** on a node in a different rack(off-rack)
+  * **3rd** on the same rack as 2nd, but on a different node
+* Why so?
+  * Tradeoff between reliability, write bandwidth and read bandwidth
+
+# Writing replicas
+![](cloud-img/08-10.png)
+![](cloud-img/08-11.png)
+When completed, each datanode reports to namenode "block received" with block info
+![](cloud-img/08-12.png)
+Note: The initial node of the subsequent blocks of File.txt will vary for each block (why?) Spreading around the hot spots of in-rack and across-rack traffic
+![](cloud-img/08-13.png)
+
+# Discussion
+* Why no put them in Three nodes located at three different racks?
+* Seem Good: This maximizes redundancy.......
+
+![](./cloud-img/break.png)
+
