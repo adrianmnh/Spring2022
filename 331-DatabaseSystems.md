@@ -36,7 +36,7 @@ Domain Product_Type(Beauty, clothing, warehouse, food)
 
 <img src="./331-img/break.png">
 
-## _Class 3 - 2/7/22_
+# _Class 3 - 2/7/22_
 
 # Relational Algebra
 Theoretical language with operations that work on one or more relations to define another relation without changing the original
@@ -330,7 +330,7 @@ Staff_id | Dept_id
 
 <img src="./331-img/break.png">
 
-## _Class 4 - 2/9/22_
+# _Class 4 - 2/9/22_
 
 *Identify the room for patient Stephanie Jones. Display the room.*
 
@@ -363,7 +363,7 @@ Step 5: Display the output
 
 <img src="./331-img/break.png">
 
-## _Class 5 - 2/14/2022_
+# _Class 5 - 2/14/2022_
 
 
 ## UML
@@ -379,7 +379,7 @@ Arrows indicate relation between tables
 
 <img src="./331-img/break.png">
 
-## _Class 6 - 2/16/2022_
+# _Class 6 - 2/16/2022_
 
 ## Music Database
 
@@ -425,7 +425,7 @@ minimize duplication: Make primary keys to prevent duplicate data
 
  <img src="./331-img/break.png">
 
-## _Class 7 - 2/23/2022_
+# _Class 7 - 2/23/2022_
 
 # Convert UML Diagram entities into Relations
 
@@ -488,7 +488,7 @@ Identify artist with no songs. Display the artist name.
 
 
 
-## _Class 8 - 2/28/2022_
+# _Class 8 - 2/28/2022_
 
 # Aggregate Data
 
@@ -580,7 +580,7 @@ Domain(customer_plan) &rarr; plan_cost
 
 <img src="./331-img/break.png">
 
-## _Class 9 - 3/2/2022_
+# _Class 9 - 3/2/2022_
 
 # Relational Algebra
 

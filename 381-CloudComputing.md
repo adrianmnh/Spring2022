@@ -67,7 +67,7 @@ TPU Tensor Processing Units
 
 <img src="./cloud-img/break.png">
 
-### *Class 3 - 2/10/2022*
+# *Class 3 - 2/10/2022*
 ## Availability Zones
 **Unique physical locations** within an Azure region. Made up of **one or more data centers** equipped with **independent power, cooling,and networking**. To ensure resiliency, there's a minimum of three separete zones in all enable regions
 
@@ -113,13 +113,13 @@ The AWS Cloud spans 84 Availability Zones within 26
 
 <img src="./cloud-img/break.png">
 
-### *Class 4 - 2/15/2022*
+# *Class 4 - 2/15/2022*
 
 
 
 <img src="./cloud-img/break.png">
 
-### *Class 7 - 2/24/2022*
+# *Class 7 - 2/24/2022*
 ## Everything at google runs in cointainers
 * Gmail Webserach Maps
 * MapReduce MillWHeel Pregel
@@ -328,7 +328,7 @@ next week: **Hadoop**
 
 <img src="./cloud-img/break.png">
 
-### *Class 7 - 2/24/2022*
+# *Class 8 - 3/1/2022*
 
 # Hadoop
 
@@ -502,9 +502,154 @@ When completed, each datanode reports to namenode "block received" with block in
 Note: The initial node of the subsequent blocks of File.txt will vary for each block (why?) Spreading around the hot spots of in-rack and across-rack traffic
 ![](cloud-img/08-13.png)
 
-# Discussion
-* Why no put them in Three nodes located at three different racks?
-* Seem Good: This maximizes redundancy.......
 
 ![](./cloud-img/break.png)
 
+# *Class 9 - 3/3/2022*
+
+# Discussion
+* Why not put them in Three nodes located at three different racks?
+* Seem Good: This maximizes redundancy.......
+
+To maximize reliability, we can put them in 3 different racks. Sending data from from one rack over ToR switches
+
+## Heartbeats & block reports
+Data node sends Heartbeats to Name Node every 3 seconds
+
+Every 6 hours is a (full) block report 
+
+* Blocks reports provide the NameNode with an up-to data view of where block replicas are located on the cluster
+
+NameNode builds meta data from Block reports
+
+
+## Real-world use case of HDFS
+
+NetApp provides storage solution to business/companies
+
+Large financial firm: 60 PB of raw data
+
+Requires 1200 HDFS storage nodes organized as a data lake
+
+
+![](./cloud-img/break.png)
+
+
+
+# AWS Infrastructure - IaaS
+
+## **VPC** - Amazon Virtual Private Cloud
+Allows user to launch AWS resources from a virtual network. Customizable network configuration, public subnet for web servers and private subnet for backend systems(databases or app servers). Multiple layers of security control EC2 instances in each subnet.
+
+Can be used to build a public and private subnet. Public subnet has EC2 instance that hosts a web application, the Private subnet has an RDS instance
+
+Host simple websites or blog. 
+
+Multi-tiwer web applications with strict access and security restrictions. Webservers in public subnet, application servers and databases in private subnets. 
+
+Back up and recover data center into EC2 instances. Import virtual machine images.
+
+Extend corporate network
+
+## **EC2** - Amazon Elastic Cloud
+Provides secure and resizable compute capacity in the cloud. Allows scaling up or down as needed.
+
+When stopping an instance, the Amazon Elastic Block Store(EBS) will retain data. Charges for the volume used still incur, terminating the instance permanently deletes all data
+
+On-demand instances charge only for the amount of time used. No  long term commitment or upfront payment. Ideal for short-term workloads that cannot be interrupted and low-cost computing
+
+Spot Instances can be acquired at a 90% discount of On-demand. Ideal for workloads that can be paused and restarted.
+
+Reserved Instances provide up tp 70% discount. This means you commit to paying for the instance for 1 to 3 years. Ideal for computing that needs steady usage amount.
+
+## **RDS** - Amazon Relational Database Service
+
+## **Route 53**
+
+## **AS3** - Amazon Simple Storage Service
+
+Object storage service
+* scalable
+* data availability
+* security
+* performance
+
+Used to store and protect
+* Websites
+* Mobile apps
+* backup and restore
+* enterprise apps
+* Inter of Things devices (IoT)
+* big data analytics
+
+AS3 data is stored in buckets
+* Bucket name cannot be changed
+* Private by default
+* permissions → Object Ownership → enable ACLs 
+
+**`ACLs`** - Access control list
+
+**`ARN`** - Amazon Resource name
+
+```aws
+aws s3 ls - list buckets
+
+aws s3 ls s3://bucketname - list contents of bucket
+```
+
+## Granting read/write access from EC2 instace to bucket
+
+
+## **AWS Systems manager Session Manager**
+* Review
+
+
+# AWS Platform - PaaS
+
+## **Elastic Beanstalk**
+* Deploying and scaling web apps
+
+![](./cloud-img/break.png)
+
+# AWS Software - SaaS
+
+Most services
+
+![](./cloud-img/break.png)
+
+# **Service Architecture**
+
+## Monolithic architecture
+Single point of failure causes all other components to fail
+
+## Microservices architecture
+Application components are loosely coupled. Single component failure does not affect the other components, preventing the entire application from failing
+
+
+# **Types of Services**
+
+## Managed services
+Require managing tasks: patching, backup, repair. Grant virtual access to OS and servers. Customer is responsible for scaling and building for high availability
+
+## Fully managed services
+Automate ingrastructure management tasks. No grants to virtual access and underlying OS or servers. Customer still responsible for scaling and availability
+
+## Serverless services
+Services, practices, and strategies that you can use to build more agile applications. Faster response to change and innovation. Allows user to focus on application
+<div style="display:flex; justify-content:space-between;">
+<div>
+
+Provides:
+* Automatic scaling
+* built-in high availability
+* pay-for-value billing model
+</div>
+<div>
+
+AWS handles infrastructure tasks 
+* capacity provisioning
+* patching 
+
+</div>
+
+</div>
