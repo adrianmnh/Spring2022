@@ -1,3 +1,14 @@
+![](331-img/break.png)
+
+# *Class 1 - 2/1/2022*
+
+
+
+
+![](331-img/break.png)
+
+# *Class 2 - 2/3/2022*
+
 IBM:
 * 30% less to design and build **Containerized data center**
 * Cheaper than air conditionining dropped ceilings/raised floors
@@ -5,8 +16,14 @@ IBM:
 ## Cloud Deployment mode
 
 ### Public Cloud
-Cloud infrastructure is available to the general public, owned by organization selling cloud services
-* Large scale infrastructure available on a rental basis
+Cloud infrastructure available to the **general public**, owned by organization selling cloud services
+* Large scale on a rental basis
+  * Access remotely under some Service Level Agreement **(SLAs)**
+  * usually has global network of data centers
+* Accessed from webservices or APIs
+* E-commerce accountability
+  * Web-based, utility style costing
+  * "Pas-as-you-go"
 
 ### Private Cloud
 Infrastructure for **single organization only**, may be managed by the org or a 3rd party(Virtual Private Cloud), hosted internally or externally
@@ -653,3 +670,98 @@ AWS handles infrastructure tasks
 </div>
 
 </div>
+
+
+
+
+![](./cloud-img/break.png)
+
+
+# *Class 11 - 3/10/2022*
+
+Spark - successor of Hadoop
+
+Big data, cloud processing
+
+
+Apache Hadoop lacks Unified Vision - most specialized systems **are not** loosely coupled
+
+Apis dont have a unified format, and each system has their own Api
+
+e.g. it is not easy to integrate MapReduce into Hive.
+
+* Sparsely implemented modules
+* Highlky diversified APIs. To run different systems, you will have to learn different systems.
+
+## Spark Ecosystem : A Unified Pipeline
+
+Easy to integrate code from one system into another. No need to maintain different system
+
+### **Motivation**
+### **MapReduce** - produced as a processing data engine.
+* HDFS data stored in disks
+* Input into MapReduce from cloud HDFS
+* Output gets stored in cloud HDFS
+
+### **Spark** General purpose computational framework that substantially improves performance of MapReduce, but retains the basic model
+* Memory based data processing → avopids costly I/O by keeping intermediate results in memory
+* Leverages distributed memory
+* Leverages distributed memory
+* Remembers operations applied to dataset
+
+### Flexible, in-memory data processing framework written in Scala
+**Goals:**
+* Simplicity:
+  * Rich APIs for Scala, Java and Python
+* Generality: APIs for different types of workloads
+  * Batch Streaming, Machine Learning, Graph
+* Low Latency(Perfomance): In-memory processing and caching
+* Fault-tolerance: Faults shouldn't be special case
+
+## Resilient Distributed Dataset(RDD)
+Fundamental uniot of dat ain Spark: An *Immutable* collection of objects(or record, or elements) that can be operated on "in parallel" (spread across a cluster)
+
+**Resilient** - if data in memory is lost, it can be recreated
+* Recover from node failures
+* An RDD keeps its lineage information → it can be recreated from parent RDDs
+  
+**Distributed** - processed across the cluster
+* Each RDD is composed of one or more partitiions → (partitions = parallelism)
+
+**Dataset** - can be imported from file or be created
+
+### RDDs
+**Key Idea** - Write apps in terms of transofrmations on distributed datasets. One RDD per transformation
+* Organize the RDDs into a DAG showing how data flows
+* RDD can be saved *into memory* and resued or recomputed. Spark can save it to disk if the dataset does not fit in memory
+* Built through parallel transformation (map, filter, group-by, join, etc). Automatically rebuilt on failure
+* Controllable persistence(caching in RAM)
+
+### RDDs are designed to be "Immutable"
+* Create once, reuse without changes. Spark knows lineage → can be recreated at any time → Fault-tolerance
+* Avoids data inconsistency problems( no simultaneous updates) → Correctness
+* Easily live in memory as on disk → Caching → Safe to share across processes/tasks→ Improves performance
+* Tradeoff: (**Fault-tolerance & Correctness**) vs (*DiskMemory & CPU*)
+
+### Creating a RDD
+Three ways to create a RDD
+* From a file or set of files
+* From another RDD(*most common*)
+* From a database
+* From cache/data in memory
+
+### A File-based RDD
+![](cloud-img/11-05.png)
+
+### RDD Operations
+Two types of operations **Transformations**: Define a new RDD, based on current RDDs
+
+**Actions** : return values
+
+![](cloud-img/11-06.png)
+
+### RDD Transformations - Lazy evaluations
+* Set of operations on a RDD that define how they should be transformed
+* As in relational algebra, the application of a transformation to an RDD yields a new RDD(because RDD are immutable)
+* Transformations are lazily evaluated, which allow for optimizations to take place before execution
+* Examples: map(), filter(), groupBykey(), sortByKey()...
