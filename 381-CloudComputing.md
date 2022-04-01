@@ -1,5 +1,3 @@
-![](cloud-img/break.png)
-
 <a id="top"></a>
 
 # Table of Contents
@@ -7,9 +5,11 @@
 #### [`Introduction`](#intro)
 #### [`Virtualization - Containers`](#class6)
 #### [`Virtualization - Containers`](#class7)
+#### [`Csalass14`](#class14)
+#### [`Virtualization III - Serverless`](#class15)
 #### [`Kubernetes`](#kubernet)
 
-![](cloud-img/break.png)
+<img src="./cloud-img/break.png">
 
 # *Class 1 - 2/1/2022*
 
@@ -93,11 +93,13 @@ Underlying network and system components varies per type of VM.
 
 <img src="cloud-img/01-03.png" width=700px>
 
-![](cloud-img/break.png)
+<img src="./cloud-img/break.png">
 
 [to top](#top)
 
 # *Class 2 - 2/3/2022*
+
+![](cloud-img/02-01.png)
 
 ## Containerized data centers
 IBM - 30% less to design and build **Containerized data center** than traditional one with raised floors are air-conditioning.
@@ -615,7 +617,7 @@ Note: The initial node of the subsequent blocks of File.txt will vary for each b
 ![](cloud-img/08-13.png)
 
 
-![](./cloud-img/break.png)
+<img src="./cloud-img/break.png">
 
 # *Class 9 - 3/3/2022*
 
@@ -643,7 +645,7 @@ Large financial firm: 60 PB of raw data
 
 Requires 1200 HDFS storage nodes organized as a data lake
 
-![](./cloud-img/break.png)
+<img src="./cloud-img/break.png">
 
 # *Class 11 - 3/10/2022*
 
@@ -735,7 +737,7 @@ Two types of operations **Transformations**: Define a new RDD, based on current 
 * Examples: map(), filter(), groupBykey(), sortByKey()...
 
 
-![](./cloud-img/break.png)
+<img src="./cloud-img/break.png">
 
 # *Class 13 - 3/17/2022*
 
@@ -856,17 +858,144 @@ Real-life examples
 * A search company provided dedicated machines to users that could ensure certain level of utilization (e.g 80%). Users used busy-loops to inflate utilization
 
 ## Dominant Resource Fairness(DRF)
-![](cloud-img/13-06.png)
+[](cloud-img/13-06.png)
 
-![](cloud-img/13-07.png)
+[](cloud-img/13-07.png)
 
 ## DRF inside Mesos on EC2
 
-![](cloud-img/13-08.png)
-![](cloud-img/13-09.png)
-![](cloud-img/13-10.png)
-![](cloud-img/13-11.png)
-![](./cloud-img/break.png)
+[](cloud-img/13-08.png)
+[](cloud-img/13-09.png)
+[](cloud-img/13-10.png)
+[](cloud-img/13-11.png)
+
+<img src="./cloud-img/break.png">
+
+<a id="class14"></a>
+
+[to top](#top)
+
+# *Class 14 - 3/22/2022*
+
+## Borg
+
+## Scheduling
+
+Feasibility checking: find machines for a given job
+
+Scoring: pick one machine
+* User preferences & build-in criteria
+* E-PVM (Enhanced-Parallel Virtual Machine) vs best-fit
+  * Hybrid approach
+
+<sub>Big jobs requesting for large resources, each task</sub>
+
+## Scalability
+
+## Bord's Allocation Algorithms and polivies
+
+Advanced Bin Packaging
+
+## Approach: Global Scheduler
+
+<img src="cloud-img/14-10.png" width=400>
+
+## Distributed Sheduler
+<img src="cloud-img/14-11.png" width=600>
+
+Advantages:
+* Simple → easier to scale and make resilient
+* Easy to port existing frameworks, support new ones
+
+Disadvanatages:
+* Distributed scheduling decision → **non-optimal**
+  
+## Resource Offers
+
+Resource Master → Framework
+
+Unit of allocation: **resource offer**
+
+* Vector of available resources on a node
+* E.g., node1: `<CPU>.........`
+
+## **`Mesos Architecture`**
+
+## Why does it work?
+
+A framework can just wait for an offer that matches its contraints or preferences and reject offers it doesnt like too
+
+## Performance
+
+Ramp-up time low under most scenarios
+
+Barely any performance differences between global and distributed schedulers in Facebook workload
+
+Optimizations
+* master doesn't send an offer already rejected by framework(negative caching)
+* Allow framework to specify white and black list of nodes
+
+<img src="./cloud-img/break.png">
+
+<a id="class15"></a>
+
+[to top](#top)
+
+# *Class 15 - 3/31/2022*
+
+## **`Virtualization III - Serverless Computing`**
+
+Utility Computing - Use computational resources similar to the way we use water or electricity. No need to maintain, just be able to use resource.
+
+Bare metal → Virtual Machines → Containers → Functions
+
+It is also known as **Service Computing**, **Functions**, or **Lambdas**
+
+Management-free (containers)
+* No need to handle creation, failure, replication, etc
+  
+Autoscaling
+* spin up/down functions quickly based on load
+
+Only pay for what you use
+
+![](./cloud-img/15-01.png)
+
+What is it like?
+
+Largely offered as **Function as a Service(FaaS)**
+
+* Cloud users write functions and ship them
+* Cloud provider runs and manages them
+
+Still runs of servers
+
+Has attractive features but also many limitations
+
+**Small piece of code written by developer that is executed in the cloud and run on "stateless" containers - they perform a job, and disappear**
+
+1. Allows developers to pay only for use
+2. focus on code
+3. auto scaling
+4. Highly available
+
+## **`AWS Lambda`**
+An event-driven, serverless computing FaaS platform introduced in 2014
+
+Can be written in Node.js, Python, Java, Ruby, C#, PowerShell
+
+Each function allowed to take 128MB - 3GB memory and up to 15 min
+
+Max 1000 concurrent functions
+
+Connected with many other AWS services
+
+### **`Lambda Function Triggering and Billing Model`**
+
+
+<img src="./cloud-img/break.png">
+
+[top top](#top)
 
 # AWS Infrastructure - IaaS
 
@@ -940,13 +1069,13 @@ aws s3 ls s3://bucketname - list contents of bucket
 ## **Elastic Beanstalk**
 * Deploying and scaling web apps
 
-![](./cloud-img/break.png)
+<img src="./cloud-img/break.png">
 
 # AWS Software - SaaS
 
 Most services
 
-![](./cloud-img/break.png)
+<img src="./cloud-img/break.png">
 
 # **Service Architecture**
 
@@ -974,9 +1103,21 @@ Provides:
 
 AWS handles infrastructure tasks 
 * capacity provisioning
-* patching 
+* patching
 
-![](cloud-img/break.png)
+**`Dynamic Resource Sharing`**
+
+<img src="./cloud-img/14-13.png" width = 500px>
+
+**`Mesos vs Static Partitioning`**
+
+Compared performance with statically partitioned cluster where each framework gets 25% of nodes
+
+## **`Data Locality`**
+
+
+
+<img src="./cloud-img/break.png">
 
 <a id="kubernet"></a>
 
@@ -1110,4 +1251,4 @@ Replicate everything on multiple servers - Replica is connected to the same Serv
 Application pods have containers running inside, a container runtime needs to be installed on all Nodes
 
 ### **`Kubelet`**
-interfaces with both the container(runtime) and node(the machine). Responsible for taking configurations and running the pod with a container inside
+interfaces with both the container(runtime) and node(the machine). Responsible for taking configurations and running the pod with a container inside 

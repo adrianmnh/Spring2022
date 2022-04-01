@@ -52,4 +52,8 @@ sqlmap -r file --dump tables
 **"OR"1=1"# → Griff" UNION (SELECT 1,2,3,4, table_schema, table_name FROM information_schema.tables) #**
 
 
+# Week 6
+
+
+
 
