@@ -4,6 +4,7 @@ o { color: orange }
 b { color: blue }
 </style>
 
+<a id="top"></a>
 
 # **Database System - *Daniel Laevitt***
 
@@ -423,7 +424,7 @@ minimize duplication: Make primary keys to prevent duplicate data
  # `Com-PAH-sit` primary keys
 
 
- <img src="./331-img/break.png">
+<img src="./331-img/break.png">
 
 # _Class 7 - 2/23/2022_
 
@@ -688,3 +689,410 @@ SELECT * FROM PRODUCT;
 # Exam 1 Date: 3/9
 
 ℑ
+
+
+
+<img src="./331-img/break.png">
+
+[to top](#top)
+
+# _Class 16 - 4/4/2022_
+
+## **`Database Requirements for Backup and Recovery`**
+
+1. no data loss
+2. speed
+3. cost
+4. reliability
+
+Active business from 7am - 8pm. 
+
+Say the storage fails at 10am 
+
+<img src="./331-img/break.png">
+
+[to top](#top)
+
+# _Class 17 - 4/6/2022_
+
+## **`Backup and Recovery II`**
+
+What happens if the main server fails?
+
+Everything written to main server should be copied in prallel to another server physically somewhere else.
+
+Database downtime should be zero
+
+<img src="./331-img/17-01.png">
+
+**What's the backup scenario assuming all servers fail, with a small budget, that requires zero data loss?**
+
+What storage devices can be used?
+
+* Hard drive - magnetic
+* Solid state drive - chip, memory, fast, high cost
+
+Device | Speed/byte (r/w) | Capacity | Cost | Volatility
+:-:|-:|-:|-:|:-:
+Magnetic - hard drive | 1-100 **milli**sec | 5 TB | $300 | 
+SSD - solids state drive | 100-1000 **nano**sec |5 TB | $4000 | 
+CD | 800 **milli**secs | 1 GB | $5 
+DVD | 800 **milli**secs | 5 GB | $10
+Floppy disk | 900 **milli**secs | 1.4 MB | $0.25
+Memory(RAM) | 1-20 **nano**secs | 128 GB | $5000 | Yes
+~Paper..? | 1 page/**sec** | 1000 2 MB | $10~
+Tape | seconds | 2 TB | $100 |
+
+### **`RAID`**
+
+Redundant array of independent disks
+
+**Parity**
+
+Parity bits
+
+RAID I : 1 set of disks(8) and 1 set of mirrors(8) and 2 parity disks(primary and backup)
+
+
+<img src="./331-img/break.png">
+
+[to top](#top)
+
+# _Class 18 - 4/11/2022_
+
+## **`Backup and Recovery III`**
+
+Evaluate
+1. No data lose
+2. No downtime
+
+<img src="./331-img/break.png">
+
+[to top](#top)
+
+# _Class 19 - 4/13/2022_
+
+## **`Backup and Recovery IIII`**
+
+Exam 2 Topics:
+1. SQL
+2. Normalization
+
+Format
+1. Blackboard
+
+Create a Database for CVS
+* UML
+* Create Tables
+* Normalized
+* Identify appropriate column types
+  * zipcode - **char(5)**
+  * phone - **char(10)**
+  * SS# - **char(8)**
+  * class code - **char(5)**
+  * credit card - **char(16)**
+  * Date_of_birth "January 15, 2021" - **varchar(20)**, date mm/dd/yyyy **(constraint)**
+  * column type
+    * if calculations performed, then the column type is: **number/decimal**
+    * if no calculations are performed and every digit is significant: **text varchar, char**
+
+
+Normalize:
+* 2nd Normalize Form - Functionally Dependent
+  * PK
+  * Non PK Attribute
+  * **keep IF**  non-PK attribute is functionally dependent on the PK
+    * **else** push column aside
+    * multivalue fields will be saved to their own table
+
+SQL:
+* **CREATE TABLE**
+* **INSERT**
+* **UPDATE**
+* **DELETE**
+  * STAFF
+  * PRODUCTS
+  * CUSTOMER
+    * DELETE FROM CUSTOMER WHERE CUST_ID = 11111;
+      * add attribute to customer table **CUST_STATUS= 'A' 'D'**
+  * PURCHASES(CUST_ID, PROD_ID, DATE_OF_PURCHASE, STORE_ID, PRICE)
+* **ALTER TABLE** - change table structure(rename column, change data type, add/drop column)
+* OUTPUT
+
+<img src="./331-img/break.png">
+
+[to top](#top)
+
+# _Class 24 - 5/11/2022_
+
+Dionad Trumop hidin taxes to not show income profit loss margin being negative, bad PR
+
+## **`United States privacy laws `**
+
+**`Minimalist Approach`**
+
+**`Banking`**
+
+**`Health Insurance Portability Act(HIPPA)`**
+
+Compliance - access to data doctors and patients have access to HIPPA. If a **non-need-to-know** individual access this kind of information, despite the sentiment, penalties may incur
+
+**`Student Data Privacy`**
+
+**CUNY** has to be in compliance with the rules and regulations of the USA and 
+Separate unique identifier numbers were required replacing the SSN
+
+**`Patriot Act`**
+
+Government cannot conduct search of emails or calls without previous authorization
+
+**bulk metadata collection**
+
+email(Gmail, Yahoo, iCloud)
+  * subject
+  * body
+  * attachments
+  * recipients
+  * internet message id
+  * to
+  * from
+  * cc
+  * bcc
+  * data/time
+  * email address
+  * IP
+
+Phone(Verizon, Sprint, T-Mobile)
+  * call duration
+  * start time
+  * end time
+  * call recipient
+  * call sender
+  * carrier
+  * phone
+  * location
+
+## Outside the United States - **European Union**
+
+**GDPR** - European Union Data Protection
+
+Implemented in 2018
+Give control to individuals over their personal data
+Create and manages databases to be in compliance with these
+regulations
+Can't identify individuals
+Individuals can revoke permission
+Adopted by Chile, Japan, Brazil, South Korea, Argentina and Kenya
+
+**How can citizens data not be stored but be used to identify them?**
+Personal Identifible Information(PII)
+* SS#
+* Name
+* DOB
+* Drivers License
+* Address
+* Passport
+* Credit Card
+* Phone
+
+
+
+
+<img src="./331-img/break.png">
+
+# Project 2
+
+The purpose of this Project is to get familiar with Oracle using SQL Developer, and to analyze the data of dog licenses issued by New York City between 2014 and 2021 using New York State zip code data.
+
+First, create the required database tables.
+
+## New York State zip code’s table:
+
+After examining the data on the Excel sheet, I determine table requirements from max-length of each column, e.g. zipcode format is always 5 digits, and the city's name column length does not exceed 25 characters.
+```sql
+create table zipcodes(
+zipcode char(5),
+city varchar(25),
+county varchar(20)
+zip_type varchar(10)
+);
+```
+The primary key for zip code table is added using a sequence, update and alter table queries after data import.
+
+```sql
+create sequence zip_id_seq increment by 1 start with 1;
+alter table zipcodes add id number;
+
+update zipcodes set id = zip_id_seq.nextval;
+alter table zipcodes modify id primary key;
+
+alter table zipcodes modify(zipcode invisible, city invisible, county invisible, zip_type invisible);
+alter table zipcodes modify(zipcode visible, city visible, county visible, zip_type visible);
+```
+These commands create a sequence `zip_id_seq` increasing in single increments, and create a column `id` for the **zipcodes table**.
+Next, the `id` column is set to the next value of the sequence created, starting at 1 and the column is assigned as a **primary key** attribute.
+The last 2 lines move the column we just added to the front, meaning the table structure is now `id, zipcode, city, county, zip_type`
+
+
+## The NYC Dog Licenses table:
+
+This database also requires a primary key, to keep track of individual entries. Upon examining the data on excel, and matching them with the database table requirements, the following columns and data formats are used.
+Additionally, primary key column insertion is implemented during table creation as `id` using a sequence and populated at import using `default` argument
+
+**Questions 1, 2: Create new PK for dog's table and Populate PK with unique values**
+```sql
+create sequence dog_id_seq increment by 1 start with 10000;
+
+create table dogs(
+id number default dog_id_seq.nextval primary key,
+animal_name varchar(30),
+animal_gender char(1),
+animal_birth_year number(4),
+breed_name varchar(40),
+zipcode char(5),
+license_issued_date date,
+license_expire_date date
+);
+```
+To make sure the import was succesful, the excel sheet row count must match the count of this query
+[img]
+
+All rows have been imported, the following query checks the primary key `id` is **unique**. The key must be unique if there are 493,072 distinct `id` values, the same number of rows we previously imported.
+[img]
+
+To make querying simpler, I will create a view with simplified column names and name is **`dogsSimpleView`**
+```sql
+create view dogsSimpleView as
+select dogs.id, dogs.animal_name as name, dogs.animal_gender as gender, 
+dogs.animal_birth_year as birth, dogs.breed_name as breed, 
+dogs.license_issue_date as l_issue, dogs.license_expire_date as l_expire, 
+dogs.zipcode from dogs;
+```
+
+**Question 3: Identify the most popular dog names for licenses issued in 2020**
+The queries for questions 3, 4, and 5, explicitly exclude rows from the output that contain placeholder data on the `name` field, such as **unkown** and **name not provided**. It is important to mention however, the licenses issued with placeholder name data will be used in other queries
+
+```sql
+select name as "Dog Name", 
+to_char(count(id), '999,999') as "Licenses Issued in 2020" from dogsSimpleView
+where extract(year from l_issue)=2020 and
+name not like 'UNKNOWN' and name != 'NAME NOT PROVIDED'
+group by name order by count(id) desc;
+```
+ [img]
+
+ **Questions 4, 5: Identify most popular `male`/`female` dog names for licenses issued in 2020**
+ ```sql
+select name as "Male Dog Name", 
+to_char(count(id), '999,999') as "Licenses Issued in 2020" from dogsSimpleView
+where extract(year from l_issue)=2020 and gender='M' and 
+name not like 'UNKNOWN' and name != 'NAME NOT PROVIDED'
+group by name order by count(id) desc;
+ ```
+  [img]
+ Changing line 1 in query to `select name as "Female Dog Name",` and line 3 - `gender='M'` to - `gender='F'` outputs the most popular **female** dog names
+
+[img]
+
+**Question 6: Identify the number of Chihuahuas by county/borough for licenses issued in 2020. Display the breed, county/borough and number of dogs**
+This query requires performing a cartesian product of tables dogs and zipcodes on the database's common attribute `zipcode`. This query filters out all those licenses issued with an invalid zip code, or one that is not an official NYS zip code.
+To make querying simpler, I create a view called **alldogsSimpleView**.
+```sql
+create view alldogsSimpleView as
+select dogs.id, dogs.animal_name name, dogs.animal_gender gender, dogs.animal_birth_year birth,
+dogs.breed_name breed, dogs.license_issue_date l_issue, dogs.license_expire_date l_expire, 
+zipcodes.zipcode zipcode, zipcodes.city city, zipcodes.county county
+from dogs, zipcodes where zipcodes.zipcode = dogs.zipcode;
+```
+This view is what I'm going to use for all the remaining queries.
+
+```sql
+select breed Breed, county County, count(*) "Number of Dogs" from alldogsSimpleView
+where breed='Chihuahua' and extract(year from l_issue)=2020
+group by breed, county;
+```
+[img]
+
+**Question 7: Identify most popular breeds near Queens College(11367) for licenses issues in 2020**
+For this query, I filter out dog licenses with **unknown** breed.
+```sql
+select breed "Most Popular Breeds near Queens College", count(*) "Number of Dogs" 
+from alldogsSimpleView where zipcode = 11367 and extract(year from l_issue)=2020 
+and breed!='Unknown' group by breed order by 2 desc;
+```
+[img]
+
+**Question 8: Identify the oldest dogs. Display animal's name, gender, breed, zipcode, and county**
+For this query, I filter out dog licenses issued that exceed a dog's life expectancy of 15-20 years.
+```sql
+with Result as (
+select name "Oldest Dog's Name", gender "M/F", breed "Breed", zipcode "Zip Code", county "County",
+extract(year from current_date)-birth "Dog's Age"
+from alldogsSimpleView order by 6 desc
+) select * from result where "Dog's Age" <= 20;
+```
+[img]
+
+**Question 9: Identify the zipcodes with the fewest dog licenses issued in 2020. Display the least popular zipcode first, county and number of dogs**
+```sql
+select zipcode "Least Popular Zipcodes", county "County", 
+count(*) "Number of Licenses Issued in 2020" from alldogsSimpleView
+where extract(year from l_issue)=2020 group by zipcode, county
+order by 3 asc;
+```
+[img]
+
+**Analysis**
+For the analysis of my own choosing, I will delete duplicate entries from the dogs table, find the least popular zipcodes from each county, and thus find which zipcodes and counties are the least popular from all time.
+```sql
+DELETE from dogs where id in(
+select rn from(
+    select animal_name, breed_name, animal_birth_year, dogs.zipcode, license_issue_date, license_expire_date, 
+    row_number()over(partition by animal_name, breed_name, animal_birth_year, zipcode, license_issue_date, 
+    license_expire_date order by dogs.zipcode) rn from dogs
+    order by zipcode
+    ) where rn > 1
+);    
+```
+[img]
+The inner code of this sql command groups all rows with the same values(duplicates) and enumarates them. The outer part delete all those values that are enumarated 2 and above, thus removing duplicates by leaving on the dogs table only one distinct value.
+[img]
+```sql
+create view analysis as
+select dogs.animal_name name, dogs.breed_name breed, dogs.animal_gender gender, dogs.animal_birth_year birth, 
+extract(year from current_date)-dogs.animal_birth_year age, zipcodes.zipcode, 
+dogs.license_issue_date l_issue, dogs.license_expire_date l_expire, zipcodes.city, zipcodes.county, zipcodes.zip_type,
+row_number() over(partition by dogs.animal_name, dogs.breed_name, dogs.animal_gender, dogs.animal_birth_year, zipcodes.zipcode, 
+dogs.license_issue_date, dogs.license_expire_date, zipcodes.city, zipcodes.county, zipcodes.zip_type order by dogs.id) "ROW"
+from dogs, zipcodes
+where zipcodes.zipcode = dogs.zipcode;
+```
+Here I create a view with all the relevant data from the dogs and zipcodes cartesian product
+[img]
+Finally I perform the analysis on the view and find the least popular counties and zipcodes, displaying all information about the dog's license
+```sql
+with Result as (
+select
+county "County", count(l_issue) over (partition by county) as "Licenses in County",
+zipcode "Zipcode", count(l_issue) over (partition by zipcode) as "Licenses in Zip",
+name, extract(year from current_date)-birth "Dog's Age",  breed "Breed", gender "M/F", 
+l_issue "License Issue Date", city "City"
+from analysis
+where name != 'UNKNOWN' and name != 'NAME NOT PROVIDED'
+) select * from Result 
+order by 2, 3;
+```
+[img]
+According to this output, there are 10 Counties with a single license given, making the zipcodes in those conties the least popular.
+
+**Display the structure of all tables**
+[img]
+
+**Display the version of Oracle**
+[img]
+
+<img src="./331-img/break.png">
+
+Astronaur(AID, Afirst, Alast)
+Mission (MID, Space Shuttle 45, Sally Ride)
+MissionAstro(AID, MID)
