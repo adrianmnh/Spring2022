@@ -991,6 +991,206 @@ Max 1000 concurrent functions
 Connected with many other AWS services
 
 ### **`Lambda Function Triggering and Billing Model`**
+Run user handlers in response to events
+* Web requests(**RPC handlers**)
+* Database updated (**triggers**)
+* Scheduled events (**cron jobs**)
+
+Pay per function invocation
+* No charge when no functions run (no triggering event)
+* Billed by duration of function, configured memory size, and # of functions
+  * **charge :** *actual_time * memory_cap*
+
+
+<img src="./cloud-img/break.png">
+
+<a id="class16"></a>
+
+[to top](#top)
+
+# *Class 16 - 3/31/2022*
+
+Data consistency
+
+Challenges
+
+Fault Tolerance: handle machine failures without losing data and without degradation in performance
+
+Scalability
+* Need to scale to thousands of machines
+* Neew to allow easy addition of new machines
+
+Consistency: maintain data consistency in
+
+
+**Key Question**
+
+put(key, value): where do you store a new (key, value) tuple? 
+
+get(key): where is the value associated with a given "key" stored
+
+And, do the above while providing 
+* Fault tolerance
+Scalability
+* Consistency
+
+**`Directory-Based Architecture`**
+
+Have a node maintain the mapping between keys and the machines(nodes) that store the values associated with the keys
+
+
+Having the master relay the requests → recursive query
+
+Another metohd: iterative query
+* Return node to requested and let request contact node
+
+**Recursive QUery Advantages**
+1. Faster, as typically amster/directory closer to nodes
+2. Easier to maintain consistency, as mater/directory can serialize puts()/gets()
+
+**Disadvantages**
+
+Scalability bottle neck, as all " values" go through master
+
+Iterative Query
+Advantages: more scalable
+Disadvantages: slower
+
+
+### **`Fault Tolerance`**
+**Data replication ✔**
+
+Replicate value of sevberal nodes
+
+Usually, replicas on different racks in a datacenter to guard against rack failures
+
+
+### **`Scalability`**
+
+Storage: use more nodes
+
+Request throughput
+* Can serve requests from all nodes on which a value is stored in parallel
+* Master can replicate a popular value on more nodes
+
+Master/directory scalability:
+* Replicate it
+* Partition it, so different keys are served by different masters/ directories (see Chord)
+
+### **`Scalability: Load Balancing`**
+
+Directory keeps track of the storage availability at each node
+* Preferentially insert new values on nodes with more storage available
+
+
+What happens when a new node is added?
+* Cannot insert only new values on new node. Why?
+* Move values from the heavy loaded nodes to the new node
+
+What happens when a node fails?
+* Need to replicate
+
+### **`Replication Challenges`**
+
+Need to make sure that a value is replicated correctly
+
+How do you know a value has been replicated on every node?
+* Wait for acknowledgements from every node
+
+What happens if a node fails during replication?
+* Pick another node and try again
+
+What happens if a node is slow?
+* Slow down the entire put()? Pick another node?
+
+In general....
+
+
+### **`Consistency`**
+
+How close does a distributed system emalute a single machine in terms of read and write semantics?
+
+Q. Assume (K14, V14') and put (K14, V14'') are concurrent, what value ends up being stored?
+
+> Assuming put() is atomic, then either V14' or V14'', right?
+
+Q. Assume a client calls put(K14,v14) and then get(k14), what is the result returned by get()?
+> it should be v14, right?
+
+### **`Concurrent Writes(Updates)`**
+
+If concurrent updates (e.e, puts to same key) may need to make sure that updates happen in the same order
+
+
+### **`Read after Write`**
+
+Read not guarantee to return value of latest write
+* Can happen if Master processes requests in different threads
+
+### **`Strong Consistency`**
+
+Assume Master serializes all operations
+
+Challenge: master becomes a bottleneck
+* Not addressed
+
+Still want to improve performance of read/writes
+
+### **`Quorum Consensus`**
+
+Improve put() and get() operation performance
+
+Define a replica set of size N
+
+put() waits for acks from as least W replicas
+
+get() waits for responses from at least R replicas W+R>N
+
+Why does it work?
+* There is at least one node that contains the update
+
+
+>Now, get() need to wait for any two nodes out of three to return the answer
+
+### **`Scaling Up Directory`**
+Challenge:
+* Directory contains a number of entries equal to number of (key,value) tuples in the system
+* Can be tens or hundreds of billions of entries in the system!
+
+Solution: **consistent hashing**
+
+Associate to each node a unique *id* in an uni-dimensional space 0..2^m-1
+* Partition this space acroos M machines
+* Assume keys are in the same uni-dimensional space
+* Each(key,value) is stored at the node with the smallest ID larger than Key
+
+**`Modulo hashing`**
+Consider problem of data partition:
+* Given object id X, choose obne of k servers to use
+
+Suppouse instead we use **module hashing**:
+* Place X on server i=hash(X) mod K
+
+What happens if a server fails or joins (K ← K±1)
+
+**`Problem for module hashing-Changing number of servers`**
+
+**`Consistent hashing II`**
+Assign n tokens to random points on mod 2k circle, hash key size = k
+
+Hash object random circle position
+
+Put object in **closest clockwise bucket**
+* successor(key) →bucket
+
+Desired feafures - 
+* Balance. No bucket has too many objects
+* Smoothness: Addition/removal of toekn **minimizes objecrt movements** for other buckets
+
+**`Scaling Up directory`**
+
+With consistent hashing, directory contains only a nu,ber of entried equal to number of nodes
+* Much smaller than number of tuples
 
 
 <img src="./cloud-img/break.png">
@@ -1252,3 +1452,5 @@ Application pods have containers running inside, a container runtime needs to be
 
 ### **`Kubelet`**
 interfaces with both the container(runtime) and node(the machine). Responsible for taking configurations and running the pod with a container inside 
+
+↑
