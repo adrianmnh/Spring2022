@@ -877,11 +877,15 @@ Phone(Verizon, Sprint, T-Mobile)
 **GDPR** - European Union Data Protection
 
 Implemented in 2018
+
 Give control to individuals over their personal data
-Create and manages databases to be in compliance with these
-regulations
+
+Create and manages databases to be in compliance with these regulations
+
 Can't identify individuals
+
 Individuals can revoke permission
+
 Adopted by Chile, Japan, Brazil, South Korea, Argentina and Kenya
 
 **How can citizens data not be stored but be used to identify them?**
@@ -896,7 +900,46 @@ Personal Identifible Information(PII)
 * Phone
 
 
+<img src="./331-img/break.png">
 
+[to top](#top)
+
+# _Class 25 - 5/16/2022_
+
+## **`Last Class`**
+
+In RAID, we write bits sequentailly in parallael(concurrently). By using this configuration
+
+**How do we increase speed?** Reorganize how disks are configured, 
+speed how its related to the code. Joins take a lot of speed to perform. 
+
+**daily** - changed transactions since
+
+Transaction logs contains **`DML`** - data manipulation language **commands**
+* Insert
+* Delete
+* Update
+
+Database Usage from Monday-Friday 
+
+Method of recovery
+
+**step 1:** restore full backup from previous week
+
+**step 2:** restore incremental backup from 4/4
+
+**step 3:** restore incremental backup from 4/5
+
+**step 4:** rollforward all entries in the transaction log with the exception of the transactions(**mistakes**) 
+
+## **`Locking Data Procedure`**
+
+1. **`Request Lock`** (May **acquire** Lock or **wait** for lock)
+2. Request all locks needed for transaction
+3. Only when the locks are granted, can we proceed
+4. Release locks immediatly after finished transaction 
+
+**deadlock** - when 3 or more transactions request for a lock that another transaction in progress has already acquired.
 
 <img src="./331-img/break.png">
 
